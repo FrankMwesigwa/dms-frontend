@@ -4,39 +4,37 @@ import API from "../../helpers/api";
 import { toast } from "react-toastify";
 import LoadSpinner from "../../components/Spinner";
 
-const AddDistributor = ({ close, refresh }) => {
-  const [name, setName] = useState("");
-  const [createdBy, setCreatedBy] = useState("");
+const AddAdmin = ({ close, refresh }) => {
+  const [username, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [region, setRegion] = useState("");
-  const [location, setLocation] = useState("");
-  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await API.post("/distributors", {
-        name,
-        region,
-        contact,
-        location,
-        createdBy,
+      const response = await API.post("/user", {
+        username,
+        email,
+        role,
+        password
       });
-      console.log("Distributor Added ===>", response);
+      console.log("Admin User Added ===>", response);
       setLoading(false);
-      setName("");
-      setRegion("");
-      setLocation("");
-      setContact("");
+      setUserName("");
+      setEmail("");
+      setPassword("");
+      setRole("");
       close();
       refresh();
-      toast.success(`Distributor has been created successfully`);
+      toast.success(`Admin User has been created successfully`);
     } catch (error) {
       console.log("error", error);
       setLoading(false);
-      toast.error("Error while Creating Distributor");
+      toast.error("Error while Creating Admin User");
     }
   };
 
@@ -48,15 +46,15 @@ const AddDistributor = ({ close, refresh }) => {
             for="horizontal-firstname-input"
             class="col-sm-4 col-form-label"
           >
-            Distributor
+            Username
           </label>
           <div class="col-sm-8">
             <input
               type="text"
               class="form-control"
-              placeholder="Enter Distributor Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter Username"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
             />
           </div>
         </div>
@@ -65,33 +63,15 @@ const AddDistributor = ({ close, refresh }) => {
             for="horizontal-firstname-input"
             class="col-sm-4 col-form-label"
           >
-            Region
+            Email
           </label>
           <div class="col-sm-8">
             <input
               type="text"
               class="form-control"
-              placeholder="Select Region"
-              value={region}
-              onChange={(e) => setRegion(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div class="row mb-4">
-          <label
-            for="horizontal-firstname-input"
-            class="col-sm-4 col-form-label"
-          >
-            Location
-          </label>
-          <div class="col-sm-8">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -101,21 +81,39 @@ const AddDistributor = ({ close, refresh }) => {
             for="horizontal-firstname-input"
             class="col-sm-4 col-form-label"
           >
-            Contact
+            Password
+          </label>
+          <div class="col-sm-8">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <label
+            for="horizontal-firstname-input"
+            class="col-sm-4 col-form-label"
+          >
+            Role
           </label>
           <div class="col-sm-8">
             <input
               type="text"
               class="form-control"
-              placeholder="Enter Distributor Contacts"
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              placeholder="Select Role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
             />
           </div>
         </div>
         <div>
           <Button type="button" color="primary" onClick={handleSubmit}>
-            {loading ? <LoadSpinner /> : "Add New Distributor"}
+            {loading ? <LoadSpinner /> : "Add Admin User"}
           </Button>
           <Button type="button" color="secondary" onClick={close}>
             Cancel
@@ -126,4 +124,4 @@ const AddDistributor = ({ close, refresh }) => {
   );
 };
 
-export default AddDistributor;
+export default AddAdmin;

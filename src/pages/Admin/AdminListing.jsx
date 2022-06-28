@@ -39,8 +39,8 @@ const AdminListing = ({ users, loading, link }) => {
                 <thead class="table-light">
                   <tr>
                     <th class="">Username</th>
-                    <th class="">First Name</th>
-                    <th class="">Last Name</th>
+                    <th class="">Email</th>
+                    <th class="">Password</th>
                     <th class="">Role</th>
                     <th class="">Actions</th>
                   </tr>
@@ -50,8 +50,8 @@ const AdminListing = ({ users, loading, link }) => {
                     ? users.map((user) => (
                         <tr>
                           <td>{user.username}</td>
-                          <td>{user.firstname}</td>
-                          <td>{user.lastname}</td>
+                          <td>{user.email}</td>
+                          <td>{user.password}</td>
                           <td>{user.role}</td>
                           <td>
                             <div class="d-flex gap-3">

@@ -14,7 +14,7 @@ const AdminUsers = () => {
   const loadUsers = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/users");
+      const res = await API.get("/user");
       console.log("AdminUsers Fetch Backend ===>", res);
       setUsers(res.data);
       setLoading(false);

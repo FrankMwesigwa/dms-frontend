@@ -1,16 +1,45 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import CurrencyFormat from "react-currency-format";
+import { Link, useHistory } from "react-router-dom";
+import API from "../../../helpers/api";
 import CartRow from "./CartRow";
 
 const Cart = () => {
+  const [loading, setLoading] = useState(false);
+
+  const history = useHistory();
+
+  const user = JSON.parse(localStorage.getItem("user"));
   const { cart } = useSelector((state) => ({ ...state }));
 
   const getTotal = () => {
     return cart.reduce((currentValue, nextValue) => {
       return currentValue + nextValue.count * nextValue.amount;
     }, 0);
+  };
+
+  const saveOrderToDb = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    };
+
+    try {
+      const res = await API.post("/cart", {cart}, config);
+      setLoading(false);
+      toast.success(`Order has been created successfully`);
+      if (res.data.ok) history.push("/orders/summary");
+    } catch (error) {
+      setLoading(false);
+      toast.error("Error while Creating Order");
+    }
   };
 
   return (
@@ -48,13 +77,13 @@ const Cart = () => {
               <div class="row mt-4">
                 <div class="col-sm-6">
                   <Link to="/orders/distributors" class="btn btn-secondary">
-                    <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping{" "}
+                    <i class="mdi mdi-arrow-left me-1"></i> Back{" "}
                   </Link>
                 </div>
                 <div class="col-sm-6">
                   <div class="text-sm-end mt-2 mt-sm-0">
-                    <Link to="/orders/checkout" class="btn btn-success">
-                      <i class="mdi mdi-cart-arrow-right me-1"></i> Checkout{" "}
+                    <Link class="btn btn-success" onClick={saveOrderToDb}>
+                      <i class="mdi mdi-cart-arrow-right me-1"></i> Place Order{" "}
                     </Link>
                   </div>
                 </div>
@@ -74,11 +103,12 @@ const Cart = () => {
                         {cart.map((c, i) => (
                           <div key={i}>
                             <p>
-                              {c.productname} x {c.count} = <CurrencyFormat
-                            value={c.amount * c.count}
-                            displayType="text"
-                            thousandSeparator
-                          />
+                              {c.productname} x {c.count} ={" "}
+                              <CurrencyFormat
+                                value={c.amount * c.count}
+                                displayType="text"
+                                thousandSeparator
+                              />
                             </p>
                           </div>
                         ))}

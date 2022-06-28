@@ -17,11 +17,11 @@ const Login = () => {
     e.preventDefault();
     const data = { username, password };
 
-    API.post("/admin/login", data)
+    API.post("/user/login", data)
       .then((res) => {
         console.log("Login Response Data ====>", res);
         setSuccess(true);
-        if (res.data.token) {
+        if (res.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(res.data));
           history.push("/")
           setLoading(true);
@@ -42,9 +42,9 @@ const Login = () => {
               <div class="bg-primary bg-soft">
                 <div class="row">
                   <div class="col-7">
-                    <div class="text-primary p-4">
+                    <div class="text-primary">
                       <h5 class="text-primary">Welcome Back !</h5>
-                      <p>Inthing Admin Dashboard</p>
+                      <p>Distributor Management System</p>
                     </div>
                   </div>
                 </div>

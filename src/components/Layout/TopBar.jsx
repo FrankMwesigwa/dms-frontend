@@ -1,8 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory  } from "react-router-dom";
 import logo from "../../assets/images/Plain-logo.webp";
 
 const TopBar = () => {
+
+  const history = useHistory();
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    history.push("/login");
+  };
+
   return (
     <header id="page-topbar">
       <div class="navbar-header">
@@ -92,7 +100,7 @@ const TopBar = () => {
               <div class="dropdown-divider"></div>
               <a
                 class="dropdown-item text-danger"
-                href="#"
+                onClick={logout}
               >
                 <i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>{" "}
                 <span key="t-logout">Logout</span>
