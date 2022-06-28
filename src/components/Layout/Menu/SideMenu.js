@@ -39,7 +39,7 @@ const SideMenu = () => {
                   </li>
                   <li class="mm-acti">
                     <Link to="/distributors" class="waves-effect">
-                      <i class='bx bx-building-house'></i>
+                      <i class="bx bx-building-house"></i>
                       <span key="t-dashboards">Distributors</span>
                     </Link>
                   </li>
@@ -55,6 +55,12 @@ const SideMenu = () => {
                       <span key="t-dashboards">Reports</span>
                     </Link>
                   </li>
+                  <li class="mm-acti">
+                    <Link to="/admin/users" class="waves-effect">
+                      <i class="bx bx-building-house"></i>
+                      <span key="t-dashboards">Admin Users</span>
+                    </Link>
+                  </li>
                   <li class="menu-title" key="t-menu">
                     Orders
                   </li>
@@ -66,10 +72,14 @@ const SideMenu = () => {
                   </li>
                   <li class="mm-acti">
                     <Link to="/orders/agents" class="waves-effect">
-                      <i class='bx bx-building-house'></i>
+                      <i class="bx bx-building-house"></i>
                       <span key="t-dashboards">Agents Orders</span>
                     </Link>
                   </li>
+                  {/* <li class="menu-title" key="t-menu">
+                    System Settings
+                  </li> */}
+                  
                   {/* <li class="menu-title" key="t-apps">
                     System Admin
                   </li>
