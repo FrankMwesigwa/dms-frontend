@@ -1,0 +1,134 @@
+.img-container {
+  display: flex;
+  width: 300px;
+  height: 200px;
+}
+
+.menu-title {
+  padding: 12px 20px !important;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  cursor: default;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #7f8387;
+  font-weight: 600;
+}
+
+.metismenu li {
+  display: block;
+  width: 100%;
+}
+
+#sidebar-menu ul li a {
+  display: block;
+  padding: 0.625rem 1.5rem;
+  color: #545a6d;
+  position: relative;
+  font-size: 13px;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+#sidebar-menu ul li ul.sub-menu li a {
+  padding: 0.4rem 1.5rem 0.4rem 3.5rem;
+  font-size: 13px;
+  color: #545a6d;
+}
+
+.br {
+  font-family: "boxicons" !important;
+  /* font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1; */
+
+  /* display: inline-block; */
+  display: block;
+  float: right;
+
+  text-transform: none;
+
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #495057 !important;
+  border-color: #495057;
+}
+
+.modal-header {
+  background-color: #495057;
+  color: #fff !important;
+}
+
+.red-border {
+  border: 1px solid #dc3545;
+}
+
+label.filebutton {
+  background-color: #495057;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginationItem {
+  background: #fff;
+  border: 2px solid #666;
+  padding: 10px 15px;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  position: relative;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.paginationItem span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.prev,
+.next {
+  background: #fff;
+  border: none;
+  padding: 10px;
+  color: blue;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.paginationItem.active {
+  border: 1px solid #888;
+  color: #888;
+  pointer-events: none;
+}
+
+.prev.disabled,
+.next.disabled {
+  pointer-events: none;
+  box-shadow: none;
+  color: #999;
+}
