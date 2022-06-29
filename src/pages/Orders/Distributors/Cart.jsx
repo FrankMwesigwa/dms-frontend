@@ -34,8 +34,8 @@ const Cart = () => {
     try {
       const res = await API.post("/cart", {cart}, config);
       setLoading(false);
-      toast.success(`Order has been created successfully`);
       if (res.data.ok) history.push("/orders/summary");
+      toast.success(`Order has been created successfully`);
     } catch (error) {
       setLoading(false);
       toast.error("Error while Creating Order");
@@ -83,7 +83,7 @@ const Cart = () => {
                 <div class="col-sm-6">
                   <div class="text-sm-end mt-2 mt-sm-0">
                     <Link class="btn btn-success" onClick={saveOrderToDb}>
-                      <i class="mdi mdi-cart-arrow-right me-1"></i> Place Order{" "}
+                      <i class="mdi mdi-cart-arrow-right me-1"></i> Check Out{" "}
                     </Link>
                   </div>
                 </div>
@@ -116,7 +116,7 @@ const Cart = () => {
                     </tr>
                     <tr>
                       <th>
-                        Total : UGX{" "}
+                        Grand Total : UGX{" "}
                         {
                           <CurrencyFormat
                             value={getTotal()}

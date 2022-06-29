@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import CurrencyFormat from "react-currency-format";
 import Product from "../../../components/Cards/ProductCard";
 
 const ProductsListing = ({ products }) => {

@@ -37,8 +37,9 @@ const ProductCard = ({ product }) => {
                 type="button"
                 class="btn btn-primary"
                 onClick={handleAddToCart}
+                disabled={product.quantity < 1}
               >
-                Add to cart
+                {product.quantity < 1 ? "Out of stock" : "Add to Cart"}
               </button>
             </div>
             <div class="col-md-8">

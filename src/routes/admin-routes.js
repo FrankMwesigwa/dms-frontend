@@ -14,6 +14,7 @@ const Cart = lazy(() => import("../pages/Orders/Distributors/Cart"));
 const AddProducts = lazy(() => import("../pages/Products/AddProduct"));
 const DistributorOrders = lazy(() => import("../pages/Orders/Distributors"));
 const OrderSummary = lazy(() => import("../pages/Orders/Distributors/OrderSummary"));
+const OrdersHistory = lazy(() => import("../pages/Orders/Distributors/History"));
 
 const AdminRoutes = () => (
   <Suspense
@@ -34,6 +35,7 @@ const AdminRoutes = () => (
         <Route exact path="/orders/cart" component={Cart} />
         <Route exact path="/admin/users" component={AdminUser} />
         <Route exact path="/orders/summary" component={OrderSummary} />
+        <Route exact path="/orders/history" component={OrdersHistory} />
         <Route exact path="/orders/distributors" component={DistributorOrders} />
       </Layout>
     </Switch>

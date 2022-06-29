@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import API from "../../../helpers/api";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
 
 const OrderSummary = () => {
@@ -7,7 +10,10 @@ const OrderSummary = () => {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  let dispatch = useDispatch();
+
   const user = JSON.parse(localStorage.getItem("user"));
+  const { cart } = useSelector((state) => ({ ...state }));
 
   const loadOrders = async () => {
     setLoading(true);
@@ -28,6 +34,57 @@ const OrderSummary = () => {
     } catch (error) {
       console.log("error", error);
       setLoading(false);
+    }
+  };
+
+  const emptyUserCart = async (token) => {
+    setLoading(true);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const res = await API.delete("/orders", config);
+      console.log("Cart Deleted ===>", res);
+      setLoading(false);
+    } catch (error) {
+      console.log("error", error);
+      setLoading(false);
+    }
+  }
+
+  const createOrder = async () => {
+    setLoading(true);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    };
+
+    try {
+      const res = await API.post("/orders", config);
+      console.log("Orders Placed Backend ===>", res);
+      setLoading(false);
+      if (res.data.ok) {
+        if (typeof window !== "undefined") localStorage.removeItem("cart");
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: [],
+        });
+        // empty cart from database
+        emptyUserCart(user.accessToken);
+        toast.success(`Order has been created successfully`);
+      }
+    } catch (error) {
+      console.log("error", error);
+      setLoading(false);
+      toast.error("Error while Creating Order");
     }
   };
 
@@ -98,6 +155,11 @@ const OrderSummary = () => {
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="">
+          <Link class="btn btn-success mt-3" onClick={createOrder}>
+            <i class="mdi mdi-cart-arrow-right me-1"></i> Place Order{" "}
+          </Link>
         </div>
       </div>
     </div>

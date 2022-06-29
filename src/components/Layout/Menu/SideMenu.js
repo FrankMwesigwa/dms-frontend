@@ -71,6 +71,12 @@ const SideMenu = () => {
                     </Link>
                   </li>
                   <li class="mm-acti">
+                    <Link to="/orders/history" class="waves-effect">
+                      <i class="bx bx-store-alt"></i>
+                      <span key="t-dashboards">Orders history</span>
+                    </Link>
+                  </li>
+                  <li class="mm-acti">
                     <Link to="/orders/agents" class="waves-effect">
                       <i class="bx bx-building-house"></i>
                       <span key="t-dashboards">Agents Orders</span>
