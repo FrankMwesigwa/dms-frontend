@@ -5,28 +5,38 @@ import { toast } from "react-toastify";
 import LoadSpinner from "../../components/Spinner";
 
 const AddDistributor = ({ close, refresh }) => {
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [createdBy, setCreatedBy] = useState("");
-  const [loading, setLoading] = useState(false);
   const [region, setRegion] = useState("");
   const [location, setLocation] = useState("");
   const [contact, setContact] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await API.post("/distributors", {
+      const response = await API.post("/user", {
+        email,
         name,
         region,
+        username,
+        password,
         contact,
         location,
         createdBy,
+        role: 'distributor'
       });
       console.log("Distributor Added ===>", response);
       setLoading(false);
       setName("");
+      setEmail("");
+      setPassword("");
+      setUserName("");
       setRegion("");
       setLocation("");
       setContact("");
@@ -43,6 +53,40 @@ const AddDistributor = ({ close, refresh }) => {
   return (
     <div className="text-center mb-4">
       <form>
+      <div class="row mb-4">
+          <label
+            for="horizontal-firstname-input"
+            class="col-sm-4 col-form-label"
+          >
+            UserName
+          </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter User Name"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
+        </div>
+        <div class="row mb-4">
+          <label
+            for="horizontal-firstname-input"
+            class="col-sm-4 col-form-label"
+          >
+            Password
+          </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </div>
         <div class="row mb-4">
           <label
             for="horizontal-firstname-input"
@@ -57,6 +101,23 @@ const AddDistributor = ({ close, refresh }) => {
               placeholder="Enter Distributor Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+        </div>
+        <div class="row mb-4">
+          <label
+            for="horizontal-firstname-input"
+            class="col-sm-4 col-form-label"
+          >
+            Email
+          </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter User Name"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>

@@ -5,6 +5,7 @@ import logo from "../../assets/images/Plain-logo.webp";
 const TopBar = () => {
 
   const history = useHistory();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -79,7 +80,7 @@ const TopBar = () => {
             >
               <i class='bx bx-user'></i>
               <span class="d-none d-xl-inline-block ms-1" key="t-henry">
-                Admin
+                {user.user.username}
               </span>
               <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
             </Link>

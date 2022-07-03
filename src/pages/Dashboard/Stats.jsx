@@ -17,7 +17,7 @@ const Stats = ({ orders, customers, products }) => {
                 <div class="card-body">
                   <div class="d-flex">
                     <div class="flex-grow-1">
-                      <p class="text-muted fw-medium">Total Products</p>
+                      <p class="text-muted fw-medium">Stock Quantity</p>
                       <h4 class="mb-0">{orders && orders.length}</h4>
                     </div>
                     <div class="flex-shrink-0 align-self-center">
@@ -36,7 +36,7 @@ const Stats = ({ orders, customers, products }) => {
                 <div class="card-body">
                   <div class="d-flex">
                     <div class="flex-grow-1">
-                      <p class="text-muted fw-medium">Total Products Sold</p>
+                      <p class="text-muted fw-medium">Stock Value</p>
                       <h4 class="mb-0">
                         {sum && (
                           <CurrencyFormat
@@ -100,7 +100,7 @@ const Stats = ({ orders, customers, products }) => {
         </div>
       </div>
 
-      <div class="row">
+      {/* <div class="row">
         <div class="col-xl-12">
           <div class="row">
             <div class="col-md-3">
@@ -189,7 +189,7 @@ const Stats = ({ orders, customers, products }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

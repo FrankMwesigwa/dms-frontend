@@ -41,6 +41,7 @@ const DistributorListing = ({ distributors, loading, link }) => {
                 <thead class="table-light">
                   <tr>
                     <th class="">Distributor</th>
+                    <th class="">Username</th>
                     <th class="">Contact</th>
                     <th class="">Region</th>
                     <th class="">Location</th>
@@ -52,6 +53,7 @@ const DistributorListing = ({ distributors, loading, link }) => {
                     ? distributors.map((distributor) => (
                         <tr>
                           <td>{distributor.name}</td>
+                          <td>{distributor.user && distributor.user.username}</td>
                           <td>{distributor.contact}</td>
                           <td>{distributor.region}</td>
                           <td>{distributor.location}</td>

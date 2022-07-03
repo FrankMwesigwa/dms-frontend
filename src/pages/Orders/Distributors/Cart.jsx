@@ -35,7 +35,7 @@ const Cart = () => {
       const res = await API.post("/cart", {cart}, config);
       setLoading(false);
       if (res.data.ok) history.push("/orders/summary");
-      toast.success(`Order has been created successfully`);
+      toast.success(`Cart has been created successfully`);
     } catch (error) {
       setLoading(false);
       toast.error("Error while Creating Order");

@@ -266,10 +266,26 @@ const AddProducts = ({ history }) => {
                   </div>
                 </div>
               </div>
+
+              <div class="d-flex flex-wrap gap-2">
+                  <button
+                    type="submit"
+                    class="btn btn-primary waves-effect waves-light"
+                    onClick={handleSubmit}
+                  >
+                    Add Product
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-secondary waves-effect waves-light"
+                  >
+                    Cancel
+                  </button>
+                </div>
             </div>
           </div>
 
-          <div class="card">
+          {/* <div class="card">
             <div class="card-body">
               <p class="card-title-desc">Warehouse Location Information</p>
               <div>
@@ -329,16 +345,6 @@ const AddProducts = ({ history }) => {
                           ))}
                       </select>
                     </div>
-                    {/* <div class="mb-3">
-                      <label for="metakeywords">Health Facility</label>
-                      <input
-                        id="metakeywords"
-                        type="text"
-                        class="form-control"
-                        value={facility}
-                        onChange={(e) => setFacility(e.target.value)}
-                      />
-                    </div> */}
                   </div>
 
                   <div class="col-sm-6">
@@ -372,38 +378,13 @@ const AddProducts = ({ history }) => {
                         onChange={(e) => setassignedDate(e.target.value)}
                       />
                     </div>
-                    {/* <div class="mb-3">
-                      <label for="metakeywords">General Hospital</label>
-                      <input
-                        id="metakeywords"
-                        type="text"
-                        class="form-control"
-                        value={genHospital}
-                        onChange={(e) => setGenHospital(e.target.value)}
-                      />
-                    </div> */}
                   </div>
                 </div>
 
-                <div class="d-flex flex-wrap gap-2">
-                  <button
-                    type="submit"
-                    class="btn btn-primary waves-effect waves-light"
-                    onClick={handleSubmit}
-                  >
-                    Add Product
-                    {/* {loading ? <Spinner /> : "Add Product"} */}
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-secondary waves-effect waves-light"
-                  >
-                    Cancel
-                  </button>
-                </div>
+                
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

@@ -54,7 +54,7 @@ const AgentsListing = ({ agents, loading, link }) => {
                   {agents.length > 0
                     ? agents.map((agent) => (
                         <tr>
-                          <td>{agent.distributor.name}</td>
+                          <td>{agent.distributor && agent.distributor.name}</td>
                           <td>{agent.name}</td>
                           <td>{agent.contact}</td>
                           <td>{agent.region}</td>

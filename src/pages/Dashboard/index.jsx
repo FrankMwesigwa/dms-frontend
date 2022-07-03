@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Stats from "./Stats";
 import API from "../../helpers/api";
-import Transactions from "./Transactions";
 import LoadSpinner from "../../components/Spinner";
+import Charts from "./Charts";
 
 const DashBoard = () => {
   const [orders, setOrders] = useState([]);
@@ -72,7 +72,7 @@ const DashBoard = () => {
         </div>
       </div>
       <Stats orders={orders} customers={customers} products={products} />
-      <Transactions />
+      <Charts />
     </>
   );
 };

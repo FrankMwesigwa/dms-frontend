@@ -5,14 +5,17 @@ import { toast } from "react-toastify";
 import LoadSpinner from "../../components/Spinner";
 
 const AddAgent = ({ close, refresh }) => {
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [createdBy, setCreatedBy] = useState("");
   const [distributor, setDistributor] = useState("");
-  const [loading, setLoading] = useState(false);
   const [distributors, setDistributors] = useState([]);
   const [region, setRegion] = useState("");
   const [location, setLocation] = useState("");
   const [contact, setContact] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const loadDistributors = async () => {
     setLoading(true);
@@ -32,21 +35,28 @@ const AddAgent = ({ close, refresh }) => {
     setLoading(true);
 
     try {
-      const response = await API.post("/agents", {
+      const response = await API.post("/user", {
         name,
-        distributor,
+        email,
+        username,
+        password,
         region,
         contact,
         location,
         createdBy,
+        distributor,
+        role: "agent",
       });
       console.log("Agent Added ===>", response);
       setLoading(false);
       setName("");
+      setEmail("");
+      setPassword("");
+      setUserName("");
       setDistributor("");
-      setRegion("")
-      setLocation("")
-      setContact("")
+      setRegion("");
+      setLocation("");
+      setContact("");
       close();
       refresh();
       toast.success(`Agent has been created successfully`);
@@ -69,6 +79,40 @@ const AddAgent = ({ close, refresh }) => {
             for="horizontal-firstname-input"
             class="col-sm-4 col-form-label"
           >
+            UserName
+          </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter User Name"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
+        </div>
+        <div class="row mb-4">
+          <label
+            for="horizontal-firstname-input"
+            class="col-sm-4 col-form-label"
+          >
+            Password
+          </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </div>
+        <div class="row mb-4">
+          <label
+            for="horizontal-firstname-input"
+            class="col-sm-4 col-form-label"
+          >
             Agent Name
           </label>
           <div class="col-sm-8">
@@ -78,6 +122,23 @@ const AddAgent = ({ close, refresh }) => {
               placeholder="Enter Agent Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+        </div>
+        <div class="row mb-4">
+          <label
+            for="horizontal-firstname-input"
+            class="col-sm-4 col-form-label"
+          >
+            Email
+          </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter User Name"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>

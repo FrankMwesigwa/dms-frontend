@@ -11,9 +11,9 @@ const OrderSummary = () => {
   const [loading, setLoading] = useState(false);
 
   let dispatch = useDispatch();
+  const history = useHistory();
 
   const user = JSON.parse(localStorage.getItem("user"));
-  const { cart } = useSelector((state) => ({ ...state }));
 
   const loadOrders = async () => {
     setLoading(true);
@@ -77,12 +77,12 @@ const OrderSummary = () => {
           type: "ADD_TO_CART",
           payload: [],
         });
-        // empty cart from database
         emptyUserCart(user.accessToken);
         toast.success(`Order has been created successfully`);
+        history.push("/orders/history");
       }
     } catch (error) {
-      console.log("error", error);
+      console.log("error", error.message);
       setLoading(false);
       toast.error("Error while Creating Order");
     }
