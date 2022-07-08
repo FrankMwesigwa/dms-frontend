@@ -1,15 +1,15 @@
 import React from "react";
-import { Link, useHistory  } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../../assets/images/Plain-logo.webp";
+import { logOut } from "../../store/actions/authActions";
 
 const TopBar = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
-  const history = useHistory();
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  const logout = () => {
-    localStorage.removeItem("user");
-    history.push("/login");
+  const Logout = () => {
+    dispatch(logOut());
   };
 
   return (
@@ -80,7 +80,7 @@ const TopBar = () => {
             >
               <i class='bx bx-user'></i>
               <span class="d-none d-xl-inline-block ms-1" key="t-henry">
-                {user.user.username}
+                {auth && auth.user.user.username}
               </span>
               <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
             </Link>
@@ -101,7 +101,7 @@ const TopBar = () => {
               <div class="dropdown-divider"></div>
               <a
                 class="dropdown-item text-danger"
-                onClick={logout}
+                onClick={Logout}
               >
                 <i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>{" "}
                 <span key="t-logout">Logout</span>

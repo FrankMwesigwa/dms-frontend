@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import API from "../../helpers/api";
+import { useDispatch, useSelector } from "react-redux";
 import LoadSpinner from "../../components/Spinner";
+import { login } from "../../store/actions/authActions";
 import logo from "../../assets/images/Plain-logo.webp";
 
 const Login = () => {
@@ -12,20 +13,17 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = { username, password };
+    const user = { username, password };
 
-    API.post("/user/login", data)
+    dispatch(login(user, history))
       .then((res) => {
-        console.log("Login Response Data ====>", res);
         setSuccess(true);
-        if (res.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(res.data));
-          history.push("/")
-          setLoading(true);
-        }
+        window.location.reload();
+        console.log("Login Response Data ====>", res);
       })
       .catch((err) => {
         setError(true);

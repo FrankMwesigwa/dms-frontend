@@ -3,28 +3,17 @@ import API from "../../../helpers/api";
 import ProductsListing from "./ProductsListing";
 
 const AgentsOrders = () => {
-  const [orders, setOrders] = useState([]);
-  const [dist, setDist] = useState();
+  const [distprods, setDistProds] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const loadAgents = async () => {
-    setLoading(true);
-    try {
-      const res = await API.get("/agents/dist/products");
-      setDist(res.data.dist);
-      setLoading(false);
-    } catch (error) {
-      console.log("error", error);
-      setLoading(false);
-    }
-  };
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  const loadOrders = async () => {
+  const loadDistProds = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/orders");
-      console.log("Distributor Orders Fetch Backend ===>", res);
-      setOrders(res.data);
+      const res = await API.get("/agents/dist/product");
+      console.log("Distributor Products Backend ===>", res);
+      setDistProds(res.data);
       setLoading(false);
     } catch (error) {
       console.log("error", error);
@@ -33,13 +22,12 @@ const AgentsOrders = () => {
   };
 
   useEffect(() => {
-    loadOrders();
-    loadAgents();
+    loadDistProds();
   }, []);
 
   return (
     <>
-      <ProductsListing products={orders} distId={dist}/>
+      <ProductsListing orders={distprods && distprods} />
     </>
   );
 };

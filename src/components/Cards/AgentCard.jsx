@@ -9,19 +9,19 @@ const AgentCard = ({ product }) => {
   const handleAddToCart = () => {
     let cart = [];
     if (typeof window !== "undefined") {
-      if (localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"));
+      if (localStorage.getItem("agentcart")) {
+        cart = JSON.parse(localStorage.getItem("agentcart"));
       }
       cart.push({
         ...product,
-        count: 1,
+        count: 1
       });
 
       let unique = _.uniqWith(cart, _.isEqual);
-      localStorage.setItem("cart", JSON.stringify(unique));
+      localStorage.setItem("agentcart", JSON.stringify(unique));
 
       dispatch({
-        type: "ADD_TO_CART",
+        type: "ADD_TO_CART_AGENT",
         payload: unique,
       });
     }
@@ -39,7 +39,7 @@ const AgentCard = ({ product }) => {
                 onClick={handleAddToCart}
                 disabled={product.count < 1}
               >
-                {product.quantity < 1 ? "Out of stock" : "Add to Cart"}
+                {product.count < 1 ? "Out of stock" : "Add to Cart"}
               </button>
             </div>
             <div class="col-md-8">
