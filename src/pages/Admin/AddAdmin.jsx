@@ -9,7 +9,6 @@ const AddAdmin = ({ close, refresh }) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +18,7 @@ const AddAdmin = ({ close, refresh }) => {
       const response = await API.post("/user", {
         username,
         email,
-        role,
+        role: 'admin',
         password
       });
       console.log("Admin User Added ===>", response);
@@ -27,7 +26,6 @@ const AddAdmin = ({ close, refresh }) => {
       setUserName("");
       setEmail("");
       setPassword("");
-      setRole("");
       close();
       refresh();
       toast.success(`Admin User has been created successfully`);
@@ -90,24 +88,6 @@ const AddAdmin = ({ close, refresh }) => {
               placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div class="row mb-4">
-          <label
-            for="horizontal-firstname-input"
-            class="col-sm-4 col-form-label"
-          >
-            Role
-          </label>
-          <div class="col-sm-8">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Select Role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
             />
           </div>
         </div>

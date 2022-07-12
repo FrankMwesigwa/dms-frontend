@@ -14,7 +14,7 @@ const Distributors = () => {
   const loaddistributors = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/distributors");
+      const res = await API.get("/distributor");
       console.log("Distributors Fetch Backend ===>", res);
       setDistributors(res.data);
       setLoading(false);

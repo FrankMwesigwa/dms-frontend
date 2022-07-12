@@ -32,9 +32,10 @@ const Cart = () => {
     };
 
     try {
-      const res = await API.post("/cart", {cart}, config);
+      const res = await API.post("/dist/cart", {cart}, config);
+      console.log("Cart Created ====>", res)
       setLoading(false);
-      if (res.data.ok) history.push("/orders/summary");
+      if (res.data.ok) history.push("/dist/order/confirm");
       toast.success(`Cart has been created successfully`);
     } catch (error) {
       setLoading(false);

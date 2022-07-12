@@ -118,7 +118,7 @@ const ProductsListing = ({ products, link, loadproducts }) => {
 
   return (
     <div class="row">
-      <AssetFilters
+      {/* <AssetFilters
         products={products}
         filtered={filtered}
         clearFilters={clearFilters}
@@ -132,7 +132,7 @@ const ProductsListing = ({ products, link, loadproducts }) => {
         setModel={setModel}
         setStatus={setStatus}
         setProgramme={setProgramme}
-      />
+      /> */}
 
       <div class="col-12">
         <div class="card">

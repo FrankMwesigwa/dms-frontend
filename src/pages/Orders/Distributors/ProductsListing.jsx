@@ -9,7 +9,7 @@ const ProductsListing = ({ products }) => {
         <div>
           <h5 class="mb-3">Products Listing:</h5>
           <div class="col-sm-4">
-            <Link to="/orders/cart">
+            <Link to="/dist/order/cart">
               <button
                 type="button"
                 class="btn btn-success waves-effect waves-light "

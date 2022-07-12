@@ -18,8 +18,7 @@ const OrdersHistory = () => {
 
     setLoading(true);
     try {
-      const res = await API.get("/orders", config);
-      console.log("Orders History Fetch Backend ===>", res);
+      const res = await API.get("/dist/orders", config);
       setOrders(res.data);
       setLoading(false);
     } catch (error) {
@@ -37,7 +36,7 @@ const OrdersHistory = () => {
       <div class="row">
         <div class="col-12">
           <div class="mb-3 d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-3 font-size-18">Orders History Listing</h4>
+            <h4 class="mb-3 font-size-18">Distributor Orders History</h4>
           </div>
         </div>
       </div>

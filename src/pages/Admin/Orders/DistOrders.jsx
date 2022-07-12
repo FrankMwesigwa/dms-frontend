@@ -1,10 +1,9 @@
 import React from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
-import LoadSpinner from "../../../../components/Spinner";
+import LoadSpinner from "../../../components/Spinner";
 
-const OrdersHistory = ({ orders, loading }) => {
+const DistOrders = ({ orders, loading, handleStatusChange }) => {
   const showOrderInTable = (order) => (
     <div class="table-responsive">
       <table class="table table-bordered">
@@ -38,13 +37,12 @@ const OrdersHistory = ({ orders, loading }) => {
   );
 
   const showEachOrders = () =>
-    orders &&
     orders.map((order, i) => (
       <div key={i} className="card">
         <div class="card-body">
           <p>
             Order ID: {order._id} // Order Date:{" "}
-            {moment(order.createdAt).format("MM/DD/YYYY")} //Status:{" "}
+            {moment(order.createdAt).format("MM/DD/YYYY")} Order Status:{" "}
             <span class="badge badge-pill badge-soft-danger font-size-11">
               {order.orderStatus}
             </span>
@@ -52,25 +50,34 @@ const OrdersHistory = ({ orders, loading }) => {
           {showOrderInTable(order)}
           <div className="row">
             <div className="col">
-              <button
-                type="button"
-                class="btn btn-success waves-effect waves-light "
+                <p>Update Order Status: </p>
+            </div>
+            <div className="col">
+              <select
+                onChange={(e) => handleStatusChange(order._id, e.target.value)}
+                className="form-control"
+                defaultValue={order.orderStatus}
+                name="status"
               >
-                <i class="mdi mdi-plus me-1"></i> PDF Download
-              </button>
+                <option value="Not Processed">Not Processed</option>
+                <option value="Processing">Processing</option>
+                <option value="Dispatched">Dispatched</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Completed">Completed</option>
+              </select>
             </div>
           </div>
-          <div className="row bg-primary bg-soft rounded">
+          {/* <div className="row bg-primary bg-soft rounded">
             <div className="col">
               <h6 class="p-2 text-primary">
                 <CurrencyFormat
-                  value={order.orderTotal}
+                  value={orders.orderTotal}
                   displayType="text"
                   thousandSeparator
                 />
               </h6>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     ));
@@ -78,11 +85,11 @@ const OrdersHistory = ({ orders, loading }) => {
   return (
     <div class="row">
       <div class="col-12">
-        {loading && <LoadSpinner />}
+        {/* {loading && <LoadSpinner />} */}
         {showEachOrders()}
       </div>
     </div>
   );
 };
 
-export default OrdersHistory;
+export default DistOrders;

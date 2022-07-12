@@ -1,10 +1,9 @@
 import React from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
-import LoadSpinner from "../../../../components/Spinner";
+import LoadSpinner from "../../../components/Spinner";
 
-const OrdersHistory = ({ orders, loading }) => {
+const AdminSales = ({ orders, loading, handleStatusChange }) => {
   const showOrderInTable = (order) => (
     <div class="table-responsive">
       <table class="table table-bordered">
@@ -12,7 +11,8 @@ const OrdersHistory = ({ orders, loading }) => {
           <tr>
             <th class="">Product Name</th>
             <th class="">Quantity</th>
-            <th class="">Amount</th>
+            <th class="">Unit Price</th>
+            <th class="">Total Amount</th>
           </tr>
         </thead>
 
@@ -30,6 +30,13 @@ const OrdersHistory = ({ orders, loading }) => {
                   thousandSeparator
                 />
               </td>
+              <td>
+                <CurrencyFormat
+                  value={p.amount * p.count}
+                  displayType="text"
+                  thousandSeparator
+                />
+              </td>
             </tr>
           ))}
         </tbody>
@@ -38,37 +45,48 @@ const OrdersHistory = ({ orders, loading }) => {
   );
 
   const showEachOrders = () =>
-    orders &&
     orders.map((order, i) => (
       <div key={i} className="card">
         <div class="card-body">
-          <p>
-            Order ID: {order._id} // Order Date:{" "}
-            {moment(order.createdAt).format("MM/DD/YYYY")} //Status:{" "}
-            <span class="badge badge-pill badge-soft-danger font-size-11">
-              {order.orderStatus}
-            </span>
-          </p>
-          {showOrderInTable(order)}
           <div className="row">
             <div className="col">
-              <button
-                type="button"
-                class="btn btn-success waves-effect waves-light "
-              >
-                <i class="mdi mdi-plus me-1"></i> PDF Download
-              </button>
+              <span>
+                Order ID: {order._id} 
+              </span>
+            </div>
+            <div className="col">
+              <span>Order Status: </span>
+              <span class="badge badge-pill badge-soft-danger font-size-11">
+                {order.orderStatus}
+              </span>
             </div>
           </div>
+          <div className="row">
+            <div className="col">
+              Order Date:
+              <span>
+                {moment(order.createdAt).format("YYYY-MM-DD hh:mm a")}
+              </span>
+              <br />
+            </div>
+            <div className="col">
+              Sales Date: {moment(order.updatedAt).format("YYYY-MM-DD hh:mm a")}
+            </div>
+          </div>
+
+          {showOrderInTable(order)}
           <div className="row bg-primary bg-soft rounded">
             <div className="col">
-              <h6 class="p-2 text-primary">
+              <h4 className="p-2 text-primary">Total Cash Sales: </h4>
+            </div>
+            <div className="col">
+              <h4 class="p-2 text-primary">
                 <CurrencyFormat
                   value={order.orderTotal}
                   displayType="text"
                   thousandSeparator
                 />
-              </h6>
+              </h4>
             </div>
           </div>
         </div>
@@ -78,11 +96,11 @@ const OrdersHistory = ({ orders, loading }) => {
   return (
     <div class="row">
       <div class="col-12">
-        {loading && <LoadSpinner />}
+        {/* {loading && <LoadSpinner />} */}
         {showEachOrders()}
       </div>
     </div>
   );
 };
 
-export default OrdersHistory;
+export default AdminSales;

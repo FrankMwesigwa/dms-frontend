@@ -66,7 +66,7 @@ const CartRow = ({ p }) => {
             </a>
           </h5>
           <p class="mb-0">
-            InStock : <span class="fw-medium">{p.quantity}</span>
+            {/* InStock : <span class="fw-medium">{p.quantity}</span> */}
           </p>
         </td>
         <td>

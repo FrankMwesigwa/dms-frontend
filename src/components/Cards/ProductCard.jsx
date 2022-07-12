@@ -45,7 +45,7 @@ const ProductCard = ({ product }) => {
             <div class="col-md-8">
               <div class="">
                 <h5 class="text-truncate">{product.productname}</h5>
-                <p class="text-muted">In-Stock: {product.quantity}</p>
+                {/* <p class="text-muted">In-Stock: {product.quantity}</p> */}
                 <h5 class="my-0">
                   <b>
                     UGX{" "}

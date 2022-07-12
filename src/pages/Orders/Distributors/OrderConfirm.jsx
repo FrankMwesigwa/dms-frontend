@@ -26,7 +26,7 @@ const OrderSummary = () => {
     };
 
     try {
-      const res = await API.get("/cart", config);
+      const res = await API.get("/dist/cart", config);
       console.log("Order Summary Fetch Backend ===>", res);
       setProducts(res.data.products);
       setTotal(res.data.cartTotal);
@@ -48,7 +48,7 @@ const OrderSummary = () => {
     };
 
     try {
-      const res = await API.delete("/orders", config);
+      const res = await API.delete("/dist/orders", config);
       console.log("Cart Deleted ===>", res);
       setLoading(false);
     } catch (error) {
@@ -68,7 +68,7 @@ const OrderSummary = () => {
     };
 
     try {
-      const res = await API.post("/orders", config);
+      const res = await API.post("/dist/orders", config);
       console.log("Orders Placed Backend ===>", res);
       setLoading(false);
       if (res.data.ok) {
@@ -79,7 +79,7 @@ const OrderSummary = () => {
         });
         emptyUserCart(user.accessToken);
         toast.success(`Order has been created successfully`);
-        history.push("/orders/history");
+        history.push("/dist/orders");
       }
     } catch (error) {
       console.log("error", error.message);
