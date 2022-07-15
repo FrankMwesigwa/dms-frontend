@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
+import API from "../../../helpers/api";
 import CurrencyFormat from "react-currency-format";
 import LoadSpinner from "../../../components/Spinner";
+import Product from "./ProductCard";
 
-const DistOrders = ({ orders, loading, handleStatusChange }) => {
+const AgentsProducts = () => {
+  const [agentprods, setAgentProds] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const loadDistProds = async () => {
+    setLoading(true);
+    try {
+      const res = await API.get("/agent/order/products");
+      console.log("Agents Products Backend ===>", res);
+      setAgentProds(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.log("error", error);
+      setLoading(false);
+    }
+  };
+
   const showOrderInTable = (order) => (
     <div class="table-responsive">
       <table class="table table-bordered">
@@ -37,12 +57,13 @@ const DistOrders = ({ orders, loading, handleStatusChange }) => {
   );
 
   const showEachOrders = () =>
-    orders.map((order, i) => (
+    agentprods &&
+    agentprods.map((order, i) => (
       <div key={i} className="card">
         <div class="card-body">
           <p>
             Order ID: {order._id} // Order Date:{" "}
-            {moment(order.createdAt).format("MM/DD/YYYY")} Order Status:{" "}
+            {moment(order.createdAt).format("MM/DD/YYYY")} //Status:{" "}
             <span class="badge badge-pill badge-soft-danger font-size-11">
               {order.orderStatus}
             </span>
@@ -50,46 +71,44 @@ const DistOrders = ({ orders, loading, handleStatusChange }) => {
           {showOrderInTable(order)}
           <div className="row">
             <div className="col">
-              <p>Update Order Status: </p>
-            </div>
-            <div className="col">
-              <select
-                onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                className="form-control"
-                defaultValue={order.orderStatus}
-                name="status"
+              <button
+                type="button"
+                class="btn btn-success waves-effect waves-light "
               >
-                <option value="Not Processed">Not Processed</option>
-                <option value="Accepted">Accepted</option>
-                <option value="Rejected">Rejected</option>
-                <option value="Dispatched">Dispatched</option>
-                <option value="Completed">Completed</option>
-              </select>
+                <i class="mdi mdi-plus me-1"></i> PDF Download
+              </button>
             </div>
           </div>
-          {/* <div className="row bg-primary bg-soft rounded">
+          <div className="row bg-primary bg-soft rounded">
             <div className="col">
               <h6 class="p-2 text-primary">
                 <CurrencyFormat
-                  value={orders.orderTotal}
+                  value={order.orderTotal}
                   displayType="text"
                   thousandSeparator
                 />
               </h6>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     ));
 
+  useEffect(() => {
+    loadDistProds();
+  }, []);
+
   return (
     <div class="row">
+      <div class="col-sm-4">
+        <h3>Agent Products</h3>
+      </div>
       <div class="col-12">
-        {/* {loading && <LoadSpinner />} */}
+        {loading && <LoadSpinner />}
         {showEachOrders()}
       </div>
     </div>
   );
 };
 
-export default DistOrders;
+export default AgentsProducts;

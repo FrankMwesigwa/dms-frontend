@@ -10,11 +10,18 @@ const DistProducts = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user.accessToken}`,
+    },
+  };
+
   const loadDistProds = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/dist/orders/products");
-      console.log("Distributor Products Backend ===>", res);
+      const res = await API.get("/dist/orders/products", config);
+      console.log("Distributor Stock Backend ===>", res);
       setDistProds(res.data);
       setLoading(false);
     } catch (error) {
@@ -23,21 +30,25 @@ const DistProducts = () => {
     }
   };
 
-  const showEachOrders = () => (
-    <>
-      <div className="row bg-primary bg-soft rounded">
-        <p p-3>
-          Batch No: {distprods.batchNo}
-          <span>Created Date: </span>{moment(distprods.createdAt).format("MM/DD/YYYY")}
-        </p>
+  const showEachOrders = () =>
+    distprods.map((order, i) => (
+      <div key={i}>
+        <div class="card-body">
+          <div className="row bg-primary bg-soft rounded">
+            <div className="col">Purchase ID: {order._id}</div>
+            <div className="col">
+                Purhase Date: {moment(order.createdAt).format("YYYY-DD-MM hh:mm")}
+            </div>
+          </div>
+
+          <div class="row">
+            {order.products.map((item) => (
+              <Product product={item} />
+            ))}
+          </div>
+        </div>
       </div>
-      <div class="row">
-        {distprods.products
-          ? distprods.products.map((item) => <Product product={item} />)
-          : "No Products Yet"}
-      </div>
-    </>
-  );
+    ));
 
   useEffect(() => {
     loadDistProds();
@@ -46,7 +57,7 @@ const DistProducts = () => {
   return (
     <div class="row">
       <div class="col-sm-4">
-        <h3>Distributor Products</h3>
+        <h3>Distributor Products Stock</h3>
       </div>
       <div class="col-12">
         {loading && <LoadSpinner />}

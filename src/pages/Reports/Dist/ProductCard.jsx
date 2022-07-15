@@ -19,7 +19,9 @@ const ProductCard = ({ product }) => {
             <div class="col-md-8">
               <div class="">
                 <h5 class="text-truncate">{product.name}</h5>
-                <p class="text-muted">Stock Quantity: {product.count}</p>
+                  <span class="badge badge-pill badge-soft-danger font-size-11">
+                    Stock Quantity: {product.count}
+                  </span>
                 <h6 class="my-0">
                   <b>
                     Unit Cost{" "}

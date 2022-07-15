@@ -77,9 +77,9 @@ const AgentSummary = () => {
           type: "ADD_TO_CART_AGENT",
           payload: [],
         });
-        // emptyUserCart(user.accessToken);
+        emptyUserCart(user.accessToken);
         toast.success(`Agent Order has been created successfully`);
-        history.push("/agents/history");
+        history.push("/agent/orders");
       }
     } catch (error) {
       console.log("error", error.message);

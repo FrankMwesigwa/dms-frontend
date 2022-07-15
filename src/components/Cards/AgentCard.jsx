@@ -45,10 +45,10 @@ const AgentCard = ({ product }) => {
             <div class="col-md-8">
               <div class="">
                 <h5 class="text-truncate">{product.name}</h5>
-                <p class="text-muted">In-Stock: {product.count}</p>
-                <h5 class="my-0">
+                {/* <p class="text-muted">In-Stock: {product.count}</p> */}
+                <h6 class="my-0">
                   <b>
-                    UGX{" "}
+                    Unit Cost : {" "}
                     {product.amount && (
                       <CurrencyFormat
                         value={product.amount}
@@ -57,7 +57,7 @@ const AgentCard = ({ product }) => {
                       />
                     )}
                   </b>
-                </h5>
+                </h6>
               </div>
             </div>
           </div>

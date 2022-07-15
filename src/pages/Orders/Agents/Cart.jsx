@@ -36,7 +36,7 @@ const Cart = () => {
       console.log("Cart Response ====>", res)
       setLoading(false);
       if (res.data.ok) {
-        history.push("/agent/orders")
+        history.push("/agent/cart/summary")
         toast.success(`Agent Cart has been created successfully`);
       };
      
@@ -67,7 +67,7 @@ const Cart = () => {
                   <thead class="table-light">
                     <tr>
                       <th>Product Desc</th>
-                      <th>Price</th>
+                      <th>Unit Cost</th>
                       <th>Quantity</th>
                       <th colspan="2">Total</th>
                     </tr>

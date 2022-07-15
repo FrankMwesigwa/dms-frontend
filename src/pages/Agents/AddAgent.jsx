@@ -10,7 +10,7 @@ const AddAgent = ({ close, refresh }) => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [createdBy, setCreatedBy] = useState("");
-  const [distributor, setDistributor] = useState("");
+  const [dist, setDist] = useState("");
   const [distributors, setDistributors] = useState([]);
   const [region, setRegion] = useState("");
   const [location, setLocation] = useState("");
@@ -20,7 +20,7 @@ const AddAgent = ({ close, refresh }) => {
   const loadDistributors = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/distributors");
+      const res = await API.get("/distributor");
       console.log("Distributors Backend Fectch ===>", res);
       setDistributors(res.data);
       setLoading(false);
@@ -44,7 +44,7 @@ const AddAgent = ({ close, refresh }) => {
         contact,
         location,
         createdBy,
-        distributor,
+        dist,
         role: "agent",
       });
       console.log("Agent Added ===>", response);
@@ -53,7 +53,7 @@ const AddAgent = ({ close, refresh }) => {
       setEmail("");
       setPassword("");
       setUserName("");
-      setDistributor("");
+      setDist("");
       setRegion("");
       setLocation("");
       setContact("");
@@ -154,8 +154,8 @@ const AddAgent = ({ close, refresh }) => {
               name="subs"
               className="form-control"
               placeholder="Please select"
-              value={distributor}
-              onChange={(e) => setDistributor(e.target.value)}
+              value={dist}
+              onChange={(e) => setDist(e.target.value)}
             >
               <option>Select Distributor</option>
               {distributors.length > 0 &&

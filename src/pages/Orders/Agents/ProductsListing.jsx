@@ -36,7 +36,7 @@ const ProductsListing = ({ orders, loading }) => {
   return (
     <div class="row">
       <div class="col-sm-4">
-        <Link to="/orders/agent">
+        <Link to="/agent/cart">
           <button
             type="button"
             class="btn btn-success waves-effect waves-light "

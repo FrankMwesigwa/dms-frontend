@@ -41,6 +41,12 @@ const SideMenu = () => {
                       </Link>
                     </li>
                     <li class="mm-acti">
+                      <Link to="/admin/dist/orders" class="waves-effect">
+                        <i class="bx bx-store-alt"></i>
+                        <span key="t-dashboards">Pending Orders</span>
+                      </Link>
+                    </li>
+                    <li class="mm-acti">
                       <Link to="/distributors" class="waves-effect">
                         <i class="bx bx-building-house"></i>
                         <span key="t-dashboards">Distributors</span>
@@ -53,36 +59,24 @@ const SideMenu = () => {
                       </Link>
                     </li>
                     <li class="mm-acti">
-                      <Link to="/reports" class="waves-effect">
-                        <i class="bx bx-aperture"></i>
-                        <span key="t-dashboards">Reports</span>
-                      </Link>
-                    </li>
-                    <li class="mm-acti">
                       <Link to="/admin/users" class="waves-effect">
                         <i class="bx bx-building-house"></i>
-                        <span key="t-dashboards">Admin Users</span>
+                        <span key="t-dashboards">Users</span>
                       </Link>
                     </li>
                     <li class="menu-title" key="t-menu">
-                      Orders
+                      Admin Reports
                     </li>
                     <li class="mm-acti">
-                      <Link to="/admin/dist/orders" class="waves-effect">
+                      <Link to="/admin/reports/dist" class="waves-effect">
                         <i class="bx bx-store-alt"></i>
-                        <span key="t-dashboards">Distributor Orders</span>
+                        <span key="t-dashboards">Distributor Reports</span>
                       </Link>
                     </li>
                     <li class="mm-acti">
-                      <Link to="/admin/dist/sales" class="waves-effect">
+                      <Link to="/admin/reports/agent" class="waves-effect">
                         <i class="bx bx-store-alt"></i>
-                        <span key="t-dashboards">Agregator Sales</span>
-                      </Link>
-                    </li>
-                    <li class="mm-acti">
-                      <Link to="/orders/agents" class="waves-effect">
-                        <i class="bx bx-building-house"></i>
-                        <span key="t-dashboards">Agents Orders</span>
+                        <span key="t-dashboards">Agent Reports</span>
                       </Link>
                     </li>
                   </ul>
@@ -106,22 +100,28 @@ const SideMenu = () => {
                       </Link>
                     </li>
                     <li class="mm-acti">
-                      <Link to="/dist/products" class="waves-effect">
-                        <i class="bx bx-store-alt"></i>
-                        <span key="t-dashboards">Distributor Products</span>
-                      </Link>
-                    </li>
-                    <li class="mm-acti">
                       <Link to="/dist/orders" class="waves-effect">
                         <i class="bx bx-building-house"></i>
                         <span key="t-dashboards">Distributor Orders</span>
                       </Link>
                     </li>
-                    <li class="menu-title" key="t-menu">
-                      Reports
+                    <li class="mm-acti">
+                      <Link to="/dist/agent/orders" class="waves-effect">
+                        <i class="bx bx-building-house"></i>
+                        <span key="t-dashboards">Agent Orders</span>
+                      </Link>
                     </li>
                     <li class="mm-acti">
-                      <Link to="/reports" class="waves-effect">
+                      <Link to="/dist/sales" class="waves-effect">
+                        <i class="bx bx-building-house"></i>
+                        <span key="t-dashboards">Make a Sale</span>
+                      </Link>
+                    </li>
+                    <li class="menu-title" key="t-menu">
+                      Distributor Reports
+                    </li>
+                    <li class="mm-acti">
+                      {/* <Link to="/reports" class="waves-effect">
                         <i class="bx bx-aperture"></i>
                         <span key="t-dashboards">Purchase Reports</span>
                       </Link>
@@ -129,9 +129,13 @@ const SideMenu = () => {
                         <i class="bx bx-aperture"></i>
                         <span key="t-dashboards">Inventory Reports</span>
                       </Link>
-                      <Link to="/reports" class="waves-effect">
+                      <Link to="/dist/reports/sales" class="waves-effect">
                         <i class="bx bx-aperture"></i>
-                        <span key="t-dashboards">Sales Reports</span>
+                        <span key="t-dashboards">Distributor Sales</span>
+                      </Link> */}
+                      <Link to="/dist/reports" class="waves-effect">
+                        <i class="bx bx-aperture"></i>
+                        <span key="t-dashboards">Distributor Reports</span>
                       </Link>
                     </li>
                   </ul>
@@ -149,38 +153,40 @@ const SideMenu = () => {
                       </Link>
                     </li>
                     <li class="mm-acti">
-                      <Link to="/orders/agents" class="waves-effect">
+                      <Link to="/agent/dist/products" class="waves-effect">
                         <i class="bx bx-store-alt"></i>
                         <span key="t-dashboards">Distributor Products</span>
                       </Link>
                     </li>
                     <li class="mm-acti">
-                      <Link to="/orders/agents" class="waves-effect">
+                      <Link to="/agent/products" class="waves-effect">
                         <i class="bx bx-store-alt"></i>
-                        <span key="t-dashboards">Place an Order</span>
+                        <span key="t-dashboards">Agent Products</span>
                       </Link>
                     </li>
                     <li class="mm-acti">
-                      <Link to="/orders/agents" class="waves-effect">
+                      <Link to="/agent/orders" class="waves-effect">
                         <i class="bx bx-building-house"></i>
-                        <span key="t-dashboards">Record Sales</span>
+                        <span key="t-dashboards">Agent Orders</span>
+                      </Link>
+                    </li>
+                    <li class="mm-acti">
+                      <Link to="/agent/sales" class="waves-effect">
+                        <i class="bx bx-building-house"></i>
+                        <span key="t-dashboards">Make a Sale</span>
                       </Link>
                     </li>
                     <li class="menu-title" key="t-menu">
                       Reports
                     </li>
                     <li class="mm-acti">
-                      <Link to="/agent/purchases" class="waves-effect">
+                      {/* <Link to="/agent/purchases" class="waves-effect">
                         <i class="bx bx-aperture"></i>
                         <span key="t-dashboards">Purchase Reports</span>
-                      </Link>
-                      <Link to="/reports" class="waves-effect">
+                      </Link> */}
+                      <Link to="/agent/reports" class="waves-effect">
                         <i class="bx bx-aperture"></i>
-                        <span key="t-dashboards">Inventory Reports</span>
-                      </Link>
-                      <Link to="/reports" class="waves-effect">
-                        <i class="bx bx-aperture"></i>
-                        <span key="t-dashboards">Sales Reports</span>
+                        <span key="t-dashboards">Agent Reports</span>
                       </Link>
                     </li>
                   </ul>
