@@ -42,6 +42,7 @@ const AgentSales = () => {
               <td>
                 <b>{p.name}</b>
               </td>
+
               <td>{p.sale}</td>
               <td>
                 <CurrencyFormat

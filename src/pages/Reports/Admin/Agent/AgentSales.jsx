@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
+import API from "../../../../helpers/api";
 import LoadSpinner from "../../../../components/Spinner";
 
-const OrdersHistory = ({ orders, loading, link }) => {
+const AgentSales = () => {
+  const [sales, setSales] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const loadDistProds = async () => {
+    setLoading(true);
+    try {
+      const res = await API.get("/agent/sale/bk");
+      console.log("Admin Sales Backend ===>", res);
+      setSales(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.log("error", error);
+      setLoading(false);
+    }
+  };
+
   const showOrderInTable = (order) => (
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead class="table-light">
           <tr>
             <th class="">Product Name</th>
-            <th class="">Quantity</th>
-            <th class="">Unit Cost</th>
+            <th class="">Quantity Sold</th>
+            <th class="">Unit Price</th>
+            <th class="">Total Sales</th>
           </tr>
         </thead>
 
@@ -22,10 +41,18 @@ const OrdersHistory = ({ orders, loading, link }) => {
               <td>
                 <b>{p.name}</b>
               </td>
-              <td>{p.count}</td>
+
+              <td>{p.sale}</td>
               <td>
                 <CurrencyFormat
                   value={p.amount}
+                  displayType="text"
+                  thousandSeparator
+                />
+              </td>
+              <td>
+                <CurrencyFormat
+                  value={p.salePrice}
                   displayType="text"
                   thousandSeparator
                 />
@@ -38,16 +65,20 @@ const OrdersHistory = ({ orders, loading, link }) => {
   );
 
   const showEachOrders = () =>
-    orders.map((order, i) => (
+    sales.map((order, i) => (
       <div key={i} className="card">
         <div class="card-body">
-          <p>
-            Order ID: {order._id} // Order Date:{" "}
-            {moment(order.createdAt).format("MM/DD/YYYY")} //Status:{" "}
-            {order.orderStatus}
-          </p>
-          {showOrderInTable(order)}
           <div className="row">
+            <div className="col">Sale ID: {order._id}</div>
+            <div className="col">
+              <span class="badge badge-pill badge-soft-danger font-size-11">
+                Sales Date: {moment(order.createdAt).format("YYYY-DD-MM hh:mm")}
+              </span>
+            </div>
+          </div>
+
+          {showOrderInTable(order)}
+          {/* <div className="row">
             <div className="col">
               <button
                 type="button"
@@ -56,7 +87,7 @@ const OrdersHistory = ({ orders, loading, link }) => {
                 <i class="mdi mdi-plus me-1"></i> PDF Download
               </button>
             </div>
-          </div>
+          </div> */}
           <div className="row bg-primary bg-soft rounded">
             <div className="col">
               <h6 class="p-2 text-primary">
@@ -72,8 +103,15 @@ const OrdersHistory = ({ orders, loading, link }) => {
       </div>
     ));
 
+  useEffect(() => {
+    loadDistProds();
+  }, []);
+
   return (
     <div class="row">
+      <div class="col-sm-4">
+        <h2>Agent Sales Report</h2>
+      </div>
       <div class="col-12">
         {loading && <LoadSpinner />}
         {showEachOrders()}
@@ -82,4 +120,4 @@ const OrdersHistory = ({ orders, loading, link }) => {
   );
 };
 
-export default OrdersHistory;
+export default AgentSales;

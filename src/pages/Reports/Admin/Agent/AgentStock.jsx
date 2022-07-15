@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import API from "../../../../helpers/api";
 import CurrencyFormat from "react-currency-format";
 import LoadSpinner from "../../../../components/Spinner";
+// import Product from "./ProductCard";
 
-const OrdersHistory = ({ orders, loading, link }) => {
+const AgentStock = () => {
+  const [agentprods, setAgentProds] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const loadDistProds = async () => {
+    setLoading(true);
+    try {
+      const res = await API.get("/agent/order");
+      console.log("Admin Agents Products Backend ===>", res);
+      setAgentProds(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.log("error", error);
+      setLoading(false);
+    }
+  };
+
   const showOrderInTable = (order) => (
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead class="table-light">
           <tr>
             <th class="">Product Name</th>
-            <th class="">Quantity</th>
+            <th class="">Available Stock</th>
             <th class="">Unit Cost</th>
           </tr>
         </thead>
@@ -38,13 +57,16 @@ const OrdersHistory = ({ orders, loading, link }) => {
   );
 
   const showEachOrders = () =>
-    orders.map((order, i) => (
+    agentprods &&
+    agentprods.map((order, i) => (
       <div key={i} className="card">
         <div class="card-body">
           <p>
             Order ID: {order._id} // Order Date:{" "}
             {moment(order.createdAt).format("MM/DD/YYYY")} //Status:{" "}
-            {order.orderStatus}
+            <span class="badge badge-pill badge-soft-danger font-size-11">
+              {order.orderStatus}
+            </span>
           </p>
           {showOrderInTable(order)}
           <div className="row">
@@ -72,8 +94,15 @@ const OrdersHistory = ({ orders, loading, link }) => {
       </div>
     ));
 
+  useEffect(() => {
+    loadDistProds();
+  }, []);
+
   return (
     <div class="row">
+      <div class="col-sm-4">
+        <h3>Agent Products</h3>
+      </div>
       <div class="col-12">
         {loading && <LoadSpinner />}
         {showEachOrders()}
@@ -82,4 +111,4 @@ const OrdersHistory = ({ orders, loading, link }) => {
   );
 };
 
-export default OrdersHistory;
+export default AgentStock;

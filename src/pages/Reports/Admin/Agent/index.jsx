@@ -19,7 +19,7 @@ const Reports = () => {
               </div>
 
               <div class="col-lg-8">
-                <Link to="/dist/reports/stock" class="waves-effect">
+                <Link to="/admin/reports/agent/stock" class="waves-effect">
                   <h5 class="">Agents Stock Report</h5>
                 </Link>
               </div>
@@ -42,7 +42,7 @@ const Reports = () => {
               </div>
 
               <div class="col-lg-8">
-                <Link to="/dist/reports/sale" >
+                <Link to="/admin/reports/agent/sales">
                   <h5 class="">Agents Sales Report</h5>
                 </Link>
               </div>
@@ -65,15 +65,14 @@ const Reports = () => {
               </div>
 
               <div class="col-lg-8">
-                <div>
+                <Link to="/agent/orders">
                   <h5 class="">Agents Orders Report</h5>
-                </div>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   );
 };

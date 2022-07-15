@@ -31,7 +31,7 @@ const AgentsProducts = () => {
           <tr>
             <th class="">Product Name</th>
             <th class="">Quantity</th>
-            <th class="">Amount</th>
+            <th class="">Unit Cost</th>
           </tr>
         </thead>
 

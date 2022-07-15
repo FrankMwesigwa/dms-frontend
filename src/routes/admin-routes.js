@@ -43,9 +43,12 @@ const DistStockReport = lazy(() => import("../pages/Reports/Dist/DistStock"));
 const AgentsPurchases = lazy(() => import("../pages/Reports/AgentReports/Purchase"));
 
 const AdminReportsDist = lazy(() => import("../pages/Reports/Admin/Dist"));
-const AdminReportsAgent = lazy(() => import("../pages/Reports/Admin/Agent"));
 const AdminReportsDistStock = lazy(() => import("../pages/Reports/Admin/Dist/DistStock"));
 const AdminReportsDistSales = lazy(() => import("../pages/Reports/Admin/Dist/DistSales"));
+
+const AdminReportsAgent = lazy(() => import("../pages/Reports/Admin/Agent"));
+const AdminReportsAgentStock = lazy(() => import("../pages/Reports/Admin/Agent/AgentStock"));
+const AdminReportsAgentSales = lazy(() => import("../pages/Reports/Admin/Agent/AgentSales"));
 
 const AdminRoutes = () => (
   <Suspense
@@ -72,6 +75,8 @@ const AdminRoutes = () => (
         <Route exact path="/admin/reports/dist/sales" component={AdminReportsDistSales} />
 
         <Route exact path="/admin/reports/agent" component={AdminReportsAgent} />
+        <Route exact path="/admin/reports/agent/stock" component={AdminReportsAgentStock} />
+        <Route exact path="/admin/reports/agent/sales" component={AdminReportsAgentSales} />
         
         <Route exact path="/agent/cart" component={AgentCart} />
         <Route exact path="/agent/orders" component={AgentsOrders} />
